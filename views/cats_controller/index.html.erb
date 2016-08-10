@@ -1,0 +1,26 @@
+<h1>All of the Cats!</h1>
+
+<% if @current_user %>
+  <%= "Signed in as #{@current_user.username}" %>
+  <br>
+  <form action="session/logout" method="post">
+    <input type="submit" value="Sign Out">
+  </form>
+<% else %>
+
+  <a href="/session/new">Sign in!</a><br>
+  <a href="/users/new">Sign up!</a>
+<% end %>
+
+<ul>
+  <% @cats.each do |cat| %>
+    <li>
+      <%= cat.name %>
+      <ul>
+        <li>Owner: <%= cat.user.username %> </li>
+      </ul>
+    </li>
+  <% end %>
+</ul>
+
+<a href="/cats/new">Create a new cat!</a>

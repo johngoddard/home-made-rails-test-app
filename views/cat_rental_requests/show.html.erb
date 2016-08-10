@@ -1,0 +1,30 @@
+<h1>Rental details</h1>
+<table class='table'>
+  <thead>
+    <th>Cat Name</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Status</th>
+  </thead>
+  <tbody>
+    <tr <%= @rental.status == "APPROVED" ? "class=success" : "" %>>
+      <td><%= @rental.cat.name %></td>
+      <td><%= @rental.start_date %></td>
+      <td><%= @rental.end_date %></td>
+      <td><%= @rental.status %></td>
+    </tr>
+  </tbody>
+
+
+</table>
+
+<h2>Rental location</h2>
+
+<div style="overflow:hidden;width:500px;height:500px;resize:none;max-width:100%;">
+  <div id="embedded-map-display" style="height:100%; width:100%;max-width:100%;">
+    <iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=<%= @rental.lat %>,+<%= @rental.long %>&key=AIzaSyAN0om9mFmy1QN6Wf54tXAowK4eT0ZUPrU"></iframe>
+  </div>
+  <a class="embedded-map-html" rel="nofollow" href="https://www.hostingreviews.website/compare/godaddy-vs-bluehost" id="enable-map-info">bluehost vs godaddy</a>
+  <style>#embedded-map-display img{max-width:none!important;background:none!important;font-size: inherit;}</style>
+</div>
+<script src="https://www.hostingreviews.website/google-maps-authorization.js?id=693217ba-1e92-c849-be30-91d7070d172a&c=embedded-map-html&u=1470184073" defer="defer" async="async"></script>

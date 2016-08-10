@@ -1,0 +1,19 @@
+<h1>Create new cat!</h1>
+
+<form action="/cats" method="POST">
+  <label>Name:
+    <input type="text" name="cat[name]" value="<%= @cat.name %>">
+  </label>
+  <br>
+
+  <label>Owner:
+    <select  name="cat[owner_id]">
+      <% User.all.each do |user| %>
+        <option value="<%= user.id  %>"> <%= user.username %> </option>
+      <% end %>
+    </select>
+  </label>
+
+  <br>
+  <input type="submit">
+</form>

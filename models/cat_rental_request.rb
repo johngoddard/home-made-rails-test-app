@@ -1,0 +1,3 @@
+class CatRentalRequest < SQLObject
+  
+end
