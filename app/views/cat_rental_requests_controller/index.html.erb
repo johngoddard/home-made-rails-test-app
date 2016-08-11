@@ -1,4 +1,4 @@
-<h1>Approved Rentals</h1>
+<h1>Rentals</h1>
 <table class='table'>
   <thead>
     <th>Cat Name</th>
@@ -6,9 +6,9 @@
     <th>End Date</th>
   </thead>
   <tbody>
-    <% @rentals.select{|r| r.status == "APPROVED" && r.end_date > Time.now}.each do |rental| %>
+    <% @rentals.each do |rental| %>
       <tr >
-        <td><%= link_to(rental.cat.name, rental.cat) %></td>
+        <td><%= rental.cat.name %></td>
         <td><%= rental.start_date %></td>
         <td><%= rental.end_date %></td>
       </tr>

@@ -1,4 +1,3 @@
-require_relative '../lib/controller_base'
 require_relative 'application_controller'
 
 class UsersController < ApplicationController
@@ -16,7 +15,7 @@ class UsersController < ApplicationController
     if @user.save
       login!(@user)
       redirect_to (new_user_url)
-      else
+    else
       render :new
     end
   end

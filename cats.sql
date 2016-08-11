@@ -13,6 +13,18 @@ CREATE TABLE users (
   session_token VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE cat_rental_requests (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER,
+  cat_id INTEGER,
+  start_date DATE,
+  end_date DATE,
+
+  FOREIGN KEY(user_id) REFERENCES user(id),
+  FOREIGN KEY(cat_id) REFERENCES cat(id)
+);
+
+
 
 
 -- INSERT INTO

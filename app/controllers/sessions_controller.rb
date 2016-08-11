@@ -1,4 +1,3 @@
-require_relative '../lib/controller_base'
 require_relative 'application_controller'
 
 class SessionsController < ApplicationController

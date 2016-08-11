@@ -58,7 +58,7 @@ class ControllerBase
   # pass the rendered html to render_content
   def render(template_name)
     controller_name = self.class.name.underscore
-    path = "views/#{controller_name}/#{template_name}.html.erb"
+    path = "app/views/#{controller_name}/#{template_name}.html.erb"
     binded_template = create_binded_template(path)
 
     render_content(binded_template, 'text/html')
