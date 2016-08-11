@@ -1,8 +1,14 @@
+require_relative 'application_controller'
+
 class CatRentalRequestsController < ApplicationController
 
   def index
-    @rentals = CatRentalRequest.all
-    render :index
+    if current_user
+      @rentals = CatRentalRequest.all
+      render :index
+    else
+      redirect_to (new_session_url)
+    end
   end
 
   def new

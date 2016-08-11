@@ -1,4 +1,4 @@
-require_relative '../../lib/controller_base'
+require_relative '../../lib/rails_lite/controller_base'
 
 class ApplicationController < ControllerBase
   self.protect_from_forgery

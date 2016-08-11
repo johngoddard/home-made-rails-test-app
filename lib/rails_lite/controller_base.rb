@@ -6,7 +6,7 @@ require_relative './flash'
 # require_relative './auth_token'
 require 'byebug'
 require 'active_support/inflector'
-require_relative '../config/constants'
+require_relative '../../config/constants'
 
 class ControllerBase
   attr_reader :req, :res, :params

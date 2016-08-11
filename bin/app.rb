@@ -1,6 +1,6 @@
-require_relative '../lib/router'
+require_relative '../lib/rails_lite/router'
 require 'rack'
-require_relative '../lib/db_connection'
+require_relative '../lib/active_record_lite/db_connection'
 require_relative '../app/models/user'
 require_relative '../app/models/cat'
 require_relative '../app/models/cat_rental_request'
@@ -10,25 +10,15 @@ require_relative '../app/controllers/sessions_controller'
 require_relative '../app/controllers/cat_rental_requests_controller'
 require 'rack'
 require_relative '../config/constants'
-require_relative '../lib/show_exceptions'
-require_relative '../lib/static'
+require_relative '../lib/middleware/show_exceptions'
+require_relative '../lib/middleware/static'
+require_relative '../db/seeder'
 
 DBConnection.reset
 
-c = Constants.new
-
-h = User.new(username: "John", password: "password", session_token: SecureRandom.urlsafe_base64(16))
-h1 = User.new(username: "Andrea", password: "password", session_token: SecureRandom.urlsafe_base64(16))
-h.save
-h1.save
-
-c1 = Cat.new(name: "Cato", owner_id: 1)
-c2 = Cat.new(name: "Moto", owner_id: 1)
-c1.save
-c2.save
-
-r1 = CatRentalRequest.new(cat_id: 1, user_id: 2, start_date: '2016-09-01 10:00:00', end_date: '2016-09-21 10:00:00')
-r1.save
+constants = Constants.new
+seed_machine = Seeder.new
+seed_machine.seed
 
 router = Router.new
 router.draw do
@@ -65,5 +55,5 @@ end.to_app
 
 Rack::Server.start(
  app: app,
- Port: c.port
+ Port: constants.port
 )
