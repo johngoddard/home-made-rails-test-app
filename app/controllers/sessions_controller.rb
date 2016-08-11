@@ -23,14 +23,4 @@ class SessionsController < ApplicationController
     logout!
     redirect_to (new_session_url)
   end
-
-  private
-
-  def new_session_url
-    "http://localhost:#{@port}/session/new"
-  end
-
-  def just_logged_in_url
-    "http://localhost:#{@port}/cats"
-  end
 end

@@ -6,25 +6,24 @@ class CatRentalRequestsController < ApplicationController
   end
 
   def new
-    @cats = Cat.all
-    @rental = CatRentalRequest.new(cat_id: params[:cat_id])
-  end
-
-  def show
-  end
-
-  def edit
-    @cats = Cat.all
+    if current_user
+      @cats = Cat.all
+      @rental = CatRentalRequest.new(cat_id: params[:cat_id])
+    else
+      redirect_to (new_session_url)
+    end
   end
 
   def create
     if current_user.nil?
       redirect_to (new_session_url)
     else
-      @rental = CatRentalRequest.new(cat_id: params["cat_rental_request"]["cat_id"],
-                                     user_id: current_user.id,
-                                     start_date: params["cat_rental_request"]["start_date"],
-                                     end_date: params["cat_rental_request"]["end_date"])
+      @rental = CatRentalRequest.new(
+         cat_id: params["cat_rental_request"]["cat_id"],
+         user_id: current_user.id,
+         start_date: params["cat_rental_request"]["start_date"],
+         end_date: params["cat_rental_request"]["end_date"]
+         )
       if @rental.save
         redirect_to rentals_url
       else
@@ -35,8 +34,9 @@ class CatRentalRequestsController < ApplicationController
 
 
   private
-  def rental_params
-    params.require(:cat_rental_request).permit(:cat_id, :start_date, :end_date, :status, :lat, :long)
+
+  def new_session_url
+    "http://localhost:#{@port}/session/new"
   end
 
   def rentals_url

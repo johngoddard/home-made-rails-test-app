@@ -10,6 +10,8 @@ require_relative '../app/controllers/sessions_controller'
 require_relative '../app/controllers/cat_rental_requests_controller'
 require 'rack'
 require_relative '../config/constants'
+require_relative '../lib/show_exceptions'
+require_relative '../lib/static'
 
 DBConnection.reset
 
@@ -54,6 +56,12 @@ app = Proc.new do |env|
 
   res.finish
 end
+
+app = Rack::Builder.new do
+  use Static
+  use ShowExceptions
+  run app
+end.to_app
 
 Rack::Server.start(
  app: app,

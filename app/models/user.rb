@@ -6,6 +6,7 @@ class User < SQLObject
   attr_reader :password
 
   has_many :cats, foreign_key: :owner_id
+  has_many :cat_rental_requests
 
   self.table_name = 'users'
   self.finalize!

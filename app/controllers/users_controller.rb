@@ -21,13 +21,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params["id"].to_i)
-    render :show
+    unless current_user
+      redirect_to new_session_url
+    else
+      @user = User.find(params["id"].to_i)
+      render :show
+    end
   end
 
-  private
-
-  def new_user_url
-    "http://localhost:#{@port}/cats"
-  end
 end

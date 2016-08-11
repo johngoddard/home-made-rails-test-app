@@ -1,9 +1,26 @@
 <h2>User page: <%= @user.username %></h2>
 
-<h4> <%= "#{@user.username}'s cats: " %></h4>
+<% if @user.cats.size > 1%>
+  <h4> <%= "#{@user.username}'s cats: " %></h4>
+  <ul>
+    <% @user.cats.try(:each) do |cat| %>
+      <li><%= cat.name %></li>
+    <% end %>
+  </ul>
+<% end %>
 
-<ul>
-  <% @user.cats.try(:each) do |cat| %>
-    <li><%= cat.name %></li>
-  <% end %>
-</ul>
+
+<% if @user.cat_rental_requests.size > 0 %>
+  <h4> <%= "#{@user.username}'s rental requests: " %></h4>
+  <ul>
+    <% @user.cat_rental_requests.try(:each_with_index) do |request, idx| %>
+      <li> <strong><%= "Rental #{idx + 1}" %> </strong>
+        <ul>
+          <li>Cat: <%= request.cat.name %></li>
+          <li>Start: <%= request.start_date %></li>
+          <li>End: <%= request.end_date %></li>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
